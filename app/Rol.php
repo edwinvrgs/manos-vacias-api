@@ -24,7 +24,7 @@ class Rol extends Model implements AuthenticatableContract, AuthorizableContract
         'descripcion'
     ];
 
-    public function user() {
+    public function users() {
         return $this->hasMany(User::class);
     }
 }

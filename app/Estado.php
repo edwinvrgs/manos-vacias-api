@@ -24,7 +24,7 @@ class Estado extends Model implements AuthenticatableContract, AuthorizableContr
         'descripcion'
     ];
 
-    public function municipio() {
+    public function municipios() {
         return $this->hasMany(Municipio::class);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class Niño extends Model implements AuthenticatableContract, AuthorizableContract
+class Ninho extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;
 
@@ -21,7 +21,7 @@ class Niño extends Model implements AuthenticatableContract, AuthorizableContra
         'nombre', 'apellido', 'descripcion_situacion'
     ];
 
-    public function requerimiento() {
+    public function requerimientos() {
         return $this->hasMany(Requerimiento::class);
     }
 

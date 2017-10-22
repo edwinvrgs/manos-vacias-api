@@ -24,7 +24,7 @@ class Requerimiento extends Model implements AuthenticatableContract, Authorizab
         'descripcion', 'cantidad', 'fecha_vencimiento', 'estado'
     ];
 
-    public function adjunto() {
+    public function adjuntos() {
         return $this->hasMany(Adjunto::class);
     }
 

@@ -28,7 +28,7 @@ class Municipio extends Model implements AuthenticatableContract, AuthorizableCo
         return $this->belongsTo(Estado::class);
     }
 
-    public function representante() {
+    public function representantes() {
         return $this->hasMany(Representante::class);
     }
 }

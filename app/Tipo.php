@@ -24,7 +24,7 @@ class TIpo extends Model implements AuthenticatableContract, AuthorizableContrac
         'descripcion',
     ];
 
-    public function requerimiento() {
+    public function requerimientos() {
         return $this->hasMany(Requerimiento::class);
     }
 }
