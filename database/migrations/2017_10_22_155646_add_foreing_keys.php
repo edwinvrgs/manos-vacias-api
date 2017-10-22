@@ -1,0 +1,73 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class AddForeingKeys extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('user', function (Blueprint $table) {
+            $table->foreign('rol_id')->references('id')->on('rol')->onDelete('cascade');
+        });
+
+        Schema::table('representante', function (Blueprint $table) {
+            $table->foreign('municipio_id')->references('id')->on('municipio')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+        });
+
+        Schema::table('requerimiento', function (Blueprint $table) {
+            $table->foreign('tipo_id')->references('id')->on('tipo')->onDelete('cascade');
+            $table->foreign('ninho_id')->references('id')->on('ninho')->onDelete('cascade');
+        });
+
+        Schema::table('adjunto', function (Blueprint $table) {
+            $table->foreign('requerimiento_id')->references('id')->on('requerimiento')->onDelete('cascade');
+        });
+
+        Schema::table('municipio', function (Blueprint $table) {
+            $table->foreign('estado_id')->references('id')->on('estado')->onDelete('cascade');
+        });
+
+        Schema::table('ninho_cancer', function (Blueprint $table) {
+            $table->foreign('ninho_id')->references('id')->on('ninho')->onDelete('cascade');
+            $table->foreign('cancer_id')->references('id')->on('cancer')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('user', function (Blueprint $table) {
+            $table->dropForeign(['rol_id']);
+        });
+        Schema::table('representante', function (Blueprint $table) {
+            $table->dropForeign(['municipio_id']);
+            $table->dropForeign(['user_id']);
+        });
+        Schema::table('requerimiento', function (Blueprint $table) {
+            $table->dropForeign(['tipo_id']);
+            $table->dropForeign(['ninho_id']);
+        });
+        Schema::table('adjunto', function (Blueprint $table) {
+            $table->dropForeign(['requerimiento_id']);
+        });
+        Schema::table('municipio', function (Blueprint $table) {
+            $table->dropForeign(['estado_id']);
+        });
+        Schema::table('ninho_cancer', function (Blueprint $table) {
+            $table->dropForeign(['ninho_id']);
+            $table->dropForeign(['cancer_id']);
+        });
+    }
+}
