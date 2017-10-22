@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-class CancerController extends Controller {
+class NinhoController extends Controller {
+
 
     /**
      * Display a listing of the resource.
@@ -11,9 +12,9 @@ class CancerController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $cancers = Cancer::all();
+        $ninhos = Ninho::all();
 
-        return response()->json($cancers->toJson());
+        return response()->json($ninhos->toJson());
     }
 
     /**
@@ -23,13 +24,13 @@ class CancerController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function show($id) {
-        $cancer = Cancer::find($id);
+        $ninhos = Ninho::find($id);
 
-        if (!$cancer instanceof Cancer) {
-            return "Mi pana, el cancer con el id ${id} no existe";
+        if (!$ninho instanceof Ninho) {
+            return "Mi pana, el ninho con el id ${id} no existe";
         }
 
-        return response()->json($cancer->toJson());
+        return response()->json($ninhos->toJson());
     }
 
     /**
@@ -39,9 +40,9 @@ class CancerController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
-    	$cancer = Cancer::create($request->all());
+    	$ninho = Ninho::create($request->all());
 
-    	return response()->json($cancer);
+    	return response()->json($ninho);
     }
 
     /**
@@ -52,10 +53,10 @@ class CancerController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
-        $cancer = Cancer::find($id);
+        $ninho = Ninho::find($id);
 
-        if (!$cancer instanceof Cancer) {
-            return "Mi pana, el cancer con el id ${id} no existe";
+        if (!$ninho instanceof Ninho) {
+            return "Mi pana, el ninho con el id ${id} no existe";
         }
     }
 
@@ -66,15 +67,15 @@ class CancerController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function destroy($id) {
-        $cancer = Cancer::find($id);
+        $ninho = Ninho::find($id);
 
-        if (!$cancer instanceof Cancer) {
-            return "Mi pana, el cancer con el id ${id} no existe";
+        if (!$ninho instanceof Ninho) {
+            return "Mi pana, el ninho con el id ${id} no existe";
         }
 
-        $cancer->delete();
+        $ninho->delete();
 
-        return response()->json('Cancer eliminado correctamente');
+        return response()->json('Ninho eliminado correctamente');
     }
 
     /**

@@ -7,9 +7,6 @@ use App\Tipo;
 
 class TipoController extends Controller {
 
-    public function __construct() {
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +26,13 @@ class TipoController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function show($id) {
+        $tipo = Tipo::find($id);
+
+        if (!$tipo instanceof Tipo) {
+            return "Mi pana, el tipo con el id ${id} no existe";
+        }
+
+        return response()->json($tipo->toJson());
     }
 
     /**
@@ -38,6 +42,9 @@ class TipoController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
+    	$tipo = Tipo::create($request->all());
+
+    	return response()->json($tipo);
     }
 
     /**
@@ -48,6 +55,11 @@ class TipoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
+        $tipo = Tipo::find($id);
+
+        if (!$tipo instanceof Tipo) {
+            return "Mi pana, el tipo con el id ${id} no existe";
+        }
     }
 
     /**
@@ -57,6 +69,15 @@ class TipoController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function destroy($id) {
+        $tipo = Tipo::find($id);
+
+        if (!$tipo instanceof Tipo) {
+            return "Mi pana, el tipo con el id ${id} no existe";
+        }
+
+        $tipo->delete();
+
+        return response()->json('Tipo eliminado correctamente');
     }
 
     /**
