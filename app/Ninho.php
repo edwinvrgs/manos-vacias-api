@@ -28,4 +28,8 @@ class Ninho extends Model implements AuthenticatableContract, AuthorizableContra
     public function cancer() {
         return $this->belongsToMany(Cancer::class)->withTimestamps();
     }
+
+    public function representante() {
+        return $this->belongsTo(Representante::class);
+    }
 }

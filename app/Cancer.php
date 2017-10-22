@@ -24,7 +24,7 @@ class Cancer extends Model implements AuthenticatableContract, AuthorizableContr
         'nombre', 'descripcion',
     ];
 
-    public function niños() {
+    public function ninhos() {
         return $this->belongsToMany(Ninho::class)->withTimestamps();
     }
 }

@@ -19,6 +19,7 @@ class Representante extends Model implements AuthenticatableContract, Authorizab
      */
 
     protected $table = 'representante';
+    protected $primaryKey = 'cedula';
 
     protected $fillable = [
         'nombre', 'apellido', 'numero_contacto_1', 'numero_contacto_2'
@@ -26,6 +27,10 @@ class Representante extends Model implements AuthenticatableContract, Authorizab
 
     public function municipio() {
         return $this->belongsTo(Municipio::class);
+    }
+
+    public function ninhos() {
+        return $this->hasMany(Ninho::class);
     }
 
     public function user() {

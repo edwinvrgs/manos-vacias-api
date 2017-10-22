@@ -14,7 +14,7 @@ class CreateRepresentantesTable extends Migration
     public function up()
     {
         Schema::create('representante', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('cedula')->unsigned()->primary();
             $table->string('nombre', 20);
             $table->string('apellido', 20);
             $table->string('numero_contacto_1', 15)->unique();

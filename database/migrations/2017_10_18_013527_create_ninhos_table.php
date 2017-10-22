@@ -19,6 +19,8 @@ class CreateNinhosTable extends Migration
             $table->string('apellido', 20);
             $table->string('descripcion_situacion', 80);
             $table->timestamps();
+
+            $table->integer('representante_cedula')->unsigned();
         });
     }
 

@@ -19,6 +19,7 @@ class CreateNinhoCancerTable extends Migration
 
             $table->integer('ninho_id')->unsigned();
             $table->integer('cancer_id')->unsigned();
+
             /*$table->foreign('ninho_id')->references('id')->on('ninho')->onDelete('cascade');
             $table->foreign('cancer_id')->references('id')->on('cancer')->onDelete('cascade');*/
         });
