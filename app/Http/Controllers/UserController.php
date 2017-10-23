@@ -2,7 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\User;
+use App\Rol;
+
 class UserController extends Controller {
+
+    public function login(Request $request) {
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        $user = User::where('username', $username)
+                ->where('password', $password)->get();
+
+        if (!$user) {
+            return "Mi pana, el user que intentas buscar no existe";
+        }
+
+    	return response()->json($user);
+    }
 
     /**
      * Display a listing of the resource.
@@ -39,9 +57,15 @@ class UserController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
-    	$user = User::create($request->all());
 
-    	return response()->json($user);
+        $rol = Rol::find($request->input('rol_id'));
+
+        $newUser = new User($request->all());
+        $newUser->password = $request->input('password');
+        $newUser->rol()->associate($rol);
+        $newUser->save();
+
+    	return response()->json($newUser);
     }
 
     /**

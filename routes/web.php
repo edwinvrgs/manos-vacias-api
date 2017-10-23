@@ -15,6 +15,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->post('users/login', 'UserController@login');
 $router->post('users', 'UserController@store');
 $router->get('users', 'UserController@index');
 $router->get('users/{id}', 'UserController@show');

@@ -33,7 +33,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'password',
     ];
 
-    public function roles() {
+    public function rol() {
         return $this->belongsTo(Rol::class);
     }
 
