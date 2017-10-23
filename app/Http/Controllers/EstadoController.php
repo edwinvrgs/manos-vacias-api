@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Estado;
+
 class EstadoController extends Controller {
 
     /**
@@ -52,11 +55,15 @@ class EstadoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
-        $estado = Estado::find($id);
+        $estado = Estado::findOrFail($id);
 
         if (!$estado instanceof Estado) {
             return "Mi pana, el estado con el id ${id} no existe";
         }
+
+        $estado->update($request->all());
+
+        return response()->json($estado);
     }
 
     /**

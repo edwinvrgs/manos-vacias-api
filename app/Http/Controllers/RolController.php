@@ -55,11 +55,15 @@ class RolController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
-        $rol = Rol::find($id);
+        $rol = Rol::findOrFail($id);
 
         if (!$rol instanceof Rol) {
             return "Mi pana, el rol con el id ${id} no existe";
         }
+
+        $rol->update($request->all());
+
+        return response()->json($rol);
     }
 
     /**

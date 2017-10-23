@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Estado;
+
 class CancerController extends Controller {
 
     /**
@@ -52,11 +55,15 @@ class CancerController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
-        $cancer = Cancer::find($id);
+        $cancer = Cancer::findOrFail($id);
 
         if (!$cancer instanceof Cancer) {
             return "Mi pana, el cancer con el id ${id} no existe";
         }
+
+        $cancer->update($request->all());
+
+        return response()->json($cancer);
     }
 
     /**

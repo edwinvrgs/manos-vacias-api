@@ -32,7 +32,7 @@ class Requerimiento extends Model implements AuthenticatableContract, Authorizab
         return $this->belongsTo(Tipo::class);
     }
 
-    public function niño() {
-        return $this->belongsTo(Niño::class);
+    public function ninho() {
+        return $this->belongsTo(Ninho::class);
     }
 }

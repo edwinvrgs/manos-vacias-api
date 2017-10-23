@@ -55,11 +55,15 @@ class TipoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
-        $tipo = Tipo::find($id);
+        $tipo = Tipo::findOrFail($id);
 
         if (!$tipo instanceof Tipo) {
             return "Mi pana, el tipo con el id ${id} no existe";
         }
+
+        $tipo->update($request->all());
+
+    	return response()->json($tipo);
     }
 
     /**

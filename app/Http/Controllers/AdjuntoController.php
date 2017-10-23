@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Adjunto;
+use App\Requerimiento;
+
 class AdjuntoController extends Controller {
 
     /**
@@ -39,9 +43,14 @@ class AdjuntoController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
-    	$adjunto = Adjunto::create($request->all());
 
-    	return response()->json($adjunto);
+        $requerimiento = Requerimiento::find($request->input('requerimiento_id'));
+
+        $adjunto = new Adjunto($request->all());
+        $adjunto->requerimiento()->associate($requerimiento);
+        $adjunto->save();
+
+        return response()->json($adjunto);
     }
 
     /**
@@ -52,11 +61,15 @@ class AdjuntoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
-        $adjunto = Adjunto::find($id);
+        $adjunto = Adjunto::findOrFail($id);
 
         if (!$adjunto instanceof Adjunto) {
             return "Mi pana, el adjunto con el id ${id} no existe";
         }
+
+        $adjunto->update($request->all());
+
+        return response()->json($adjunto);
     }
 
     /**
