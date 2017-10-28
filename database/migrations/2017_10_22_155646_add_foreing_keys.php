@@ -15,11 +15,11 @@ class AddForeingKeys extends Migration
     {
         Schema::table('user', function (Blueprint $table) {
             $table->foreign('rol_id')->references('id')->on('rol')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('representante_cedula')->references('cedula')->on('representante')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::table('representante', function (Blueprint $table) {
             $table->foreign('municipio_id')->references('id')->on('municipio')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
         });
 
         Schema::table('ninho', function (Blueprint $table) {
@@ -54,13 +54,13 @@ class AddForeingKeys extends Migration
     {
         Schema::table('user', function (Blueprint $table) {
             $table->dropForeign(['rol_id']);
+            $table->dropForeign(['representante_cedula']);
         });
         Schema::table('ninho', function (Blueprint $table) {
             $table->dropForeign(['representante_cedula']);
         });
         Schema::table('representante', function (Blueprint $table) {
             $table->dropForeign(['municipio_id']);
-            $table->dropForeign(['user_id']);
         });
         Schema::table('requerimiento', function (Blueprint $table) {
             $table->dropForeign(['tipo_id']);

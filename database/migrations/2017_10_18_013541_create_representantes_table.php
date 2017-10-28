@@ -22,7 +22,6 @@ class CreateRepresentantesTable extends Migration
             $table->timestamps();
 
             $table->integer('municipio_id')->unsigned();
-            $table->integer('user_id')->unsigned();
 
             /*$table->foreign('municipio_id')->references('id')->on('municipio')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');*/
