@@ -34,7 +34,7 @@ class RepresentanteController extends Controller {
             return "Mi pana, el representante con el id ${id} no existe";
         }
 
-        return response()->json($representante->toJson());
+        return response()->json($representante);
     }
 
     /**

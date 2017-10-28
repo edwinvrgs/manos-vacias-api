@@ -32,7 +32,7 @@ class RolController extends Controller {
             return "Mi pana, el rol con el id ${id} no existe";
         }
 
-        return response()->json($rol->toJson());
+        return response()->json($rol);
     }
 
     /**

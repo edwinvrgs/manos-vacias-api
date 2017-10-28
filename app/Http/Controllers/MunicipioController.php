@@ -33,7 +33,7 @@ class MunicipioController extends Controller {
             return "Mi pana, el municipio con el id ${id} no existe";
         }
 
-        return response()->json($municipio->toJson());
+        return response()->json($municipio);
     }
 
     /**
