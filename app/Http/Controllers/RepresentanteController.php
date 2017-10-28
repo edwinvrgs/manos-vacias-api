@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Representante;
+use App\Municipio;
+use App\User;
+
 class RepresentanteController extends Controller {
 
     /**
@@ -39,9 +44,19 @@ class RepresentanteController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
-    	$representante = Representante::create($request->all());
+        $municipio = Municipio::find($request->input('municipio_id'));
+        $user = User::findOrFail($request->input('user_id'));
 
-    	return response()->json($representante);
+        $representante = new Representante($request->all());
+        $representante->municipio()->associate($municipio);
+
+        if ($user) {
+            $representante->user()->associate($user);
+        }
+
+        $representante->save();
+
+        return response()->json($representante);
     }
 
     /**
@@ -57,6 +72,10 @@ class RepresentanteController extends Controller {
         if (!$representante instanceof Representante) {
             return "Mi pana, el representante con el id ${id} no existe";
         }
+
+        $representante->update($request->all());
+
+        return response()->json($representante);
     }
 
     /**

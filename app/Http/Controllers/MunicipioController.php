@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Municipio;
+use App\Estado;
+
 class MunicipioController extends Controller {
 
     /**
@@ -39,9 +43,14 @@ class MunicipioController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
-    	$municipio = Municipio::create($request->all());
 
-    	return response()->json($municipio);
+        $estado = Estado::find($request->input('estado_id'));
+
+        $municipio = new Municipio($request->all());
+        $municipio->requerimiento()->associate($requerimiento);
+        $municipio->save();
+
+        return response()->json($municipio);
     }
 
     /**
@@ -52,11 +61,15 @@ class MunicipioController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
-        $municipio = Municipio::find($id);
+        $municipio = Municipio::findOrFail($id);
 
         if (!$municipio instanceof Municipio) {
             return "Mi pana, el municipio con el id ${id} no existe";
         }
+
+        $municipio->update($request->all());
+
+        return response()->json($municipio);
     }
 
     /**

@@ -58,15 +58,14 @@ class UserController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
-
         $rol = Rol::find($request->input('rol_id'));
 
-        $newUser = new User($request->all());
-        $newUser->password = $request->input('password');
-        $newUser->rol()->associate($rol);
-        $newUser->save();
+        $user = new User($request->all());
+        $user->password = $request->input('password');
+        $user->rol()->associate($rol);
+        $user->save();
 
-    	return response()->json($newUser);
+    	return response()->json($user);
     }
 
     /**
@@ -77,11 +76,15 @@ class UserController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         if (!$user instanceof User) {
             return "Mi pana, el user con el id ${id} no existe";
         }
+
+        $user->update($request->all());
+
+    	return response()->json($user);
     }
 
     /**

@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Representante;
+use App\Ninho;
+use App\Cancer;
+
 class NinhoController extends Controller {
 
 
@@ -40,9 +45,17 @@ class NinhoController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
-    	$ninho = Ninho::create($request->all());
+        $representante = Representante::find($request->input('representante_cedula'));
 
-    	return response()->json($ninho);
+        $cancer = Cancer::findMany($request->input('cancer_id'));
+
+        $ninho = new Ninho($request->all());
+        $ninho->representante()->associate($representante);
+        $ninho->cancer()->saveMany($cancer);
+
+        $ninho->save();
+
+        return response()->json($ninho);
     }
 
     /**
@@ -53,11 +66,15 @@ class NinhoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id) {
-        $ninho = Ninho::find($id);
+        $ninho = Ninho::findOrFail($id);
 
         if (!$ninho instanceof Ninho) {
             return "Mi pana, el ninho con el id ${id} no existe";
         }
+
+        $ninho->update($request->all());
+
+        return response()->json($ninho);
     }
 
     /**

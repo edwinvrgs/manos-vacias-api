@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->integer('rol_id')->unsigned();
+            $table->integer('representante_cedula')->unsigned();
 
             //$table->foreign('rol_id')->references('id')->on('rol')->onDelete('cascade');
         });
