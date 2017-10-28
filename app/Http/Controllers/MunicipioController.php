@@ -17,7 +17,7 @@ class MunicipioController extends Controller {
     public function index(Request $request) {
         $municipios = Municipio::all();
 
-        return response()->json($municipios->toJson());
+        return response()->json($municipios);
     }
 
     /**
