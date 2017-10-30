@@ -12,7 +12,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'Manos vacias API';
 });
 
 $router->post('users/login', 'UserController@login');
@@ -33,13 +33,13 @@ $router->get('representantes', 'RepresentanteController@index');
 $router->get('representantes/{id}', 'RepresentanteController@show');
 $router->put('representantes/{id}', 'RepresentanteController@update');
 $router->delete('representantes/{id}', 'RepresentanteController@destroy');
+$router->get('representantes/{id}/ninhos', 'RepresentanteController@indexNinhos');
 
 $router->post('ninhos', 'NinhoController@store');
 $router->get('ninhos', 'NinhoController@index');
 $router->get('ninhos/{id}', 'NinhoController@show');
 $router->put('ninhos/{id}', 'NinhoController@update');
 $router->delete('ninhos/{id}', 'NinhoController@destroy');
-
 $router->get('ninhos/{id}/cancer', 'NinhoController@indexCancer');
 $router->put('ninhos/{id}/cancer/{id_cancer}', 'NinhoController@updateCancer');
 $router->get('ninhos/{id}/requerimientos', 'NinhoController@indexRequerimientos');

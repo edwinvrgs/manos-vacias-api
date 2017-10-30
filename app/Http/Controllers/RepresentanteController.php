@@ -96,6 +96,18 @@ class RepresentanteController extends Controller {
         return response()->json('Representante eliminado correctamente');
     }
 
+    public function indexNinhos(Request $request, $id) {
+        $representates = Representante::find($id);
+
+        $ninhos = $representates->ninhos;
+
+        if (!$ninhos) {
+            return "Mi pana, el representates con el id ${id} no tiene ninhos asociados";
+        }
+
+        return response()->json($ninhos);
+    }
+
     /**
      * Store Request Validation Rules
      *
