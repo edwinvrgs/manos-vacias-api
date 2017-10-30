@@ -24,7 +24,7 @@ class Representante extends Model implements AuthenticatableContract, Authorizab
     public $incrementing = false;
 
     protected $fillable = [
-        'nombre', 'apellido', 'numero_contacto_1', 'numero_contacto_2'
+        'cedula', 'nombre', 'apellido', 'numero_contacto_1', 'numero_contacto_2'
     ];
 
     public function municipio() {

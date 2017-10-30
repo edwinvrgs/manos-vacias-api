@@ -47,7 +47,7 @@ class MunicipioController extends Controller {
         $estado = Estado::find($request->input('estado_id'));
 
         $municipio = new Municipio($request->all());
-        $municipio->requerimiento()->associate($requerimiento);
+        $municipio->estado()->associate($estado);
         $municipio->save();
 
         return response()->json($municipio);

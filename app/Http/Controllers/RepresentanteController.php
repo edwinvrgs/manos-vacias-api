@@ -45,14 +45,14 @@ class RepresentanteController extends Controller {
      */
     public function store(Request $request) {
         $municipio = Municipio::find($request->input('municipio_id'));
-        $user = User::findOrFail($request->input('user_id'));
+        $oldRepresentante = Representante::find($request->input('cedula'));
+
+        if($oldRepresentante) {
+            return 'Mi pana, esa cedula ya existe. No me vengas a hacer trampa';
+        }
 
         $representante = new Representante($request->all());
         $representante->municipio()->associate($municipio);
-
-        if ($user) {
-            $representante->user()->associate($user);
-        }
 
         $representante->save();
 
