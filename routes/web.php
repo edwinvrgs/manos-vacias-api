@@ -12,7 +12,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return 'Manos vacias API. Corregir: agregar bitacora, manejar correctamente el estado y no se';
+    return 'Manos vacias API. Corregir: agregar bitacora, manejar correctamente el estado y diferenciar entre insumo y medicamento';
 });
 
 $router->post('users/login', 'UserController@login');
