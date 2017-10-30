@@ -41,6 +41,7 @@ $router->put('ninhos/{id}', 'NinhoController@update');
 $router->delete('ninhos/{id}', 'NinhoController@destroy');
 
 $router->get('ninhos/{id}/cancer', 'NinhoController@indexCancer');
+$router->put('ninhos/{id}/cancer/{id_cancer}', 'NinhoController@updateCancer');
 $router->get('ninhos/{id}/requerimientos', 'NinhoController@indexRequerimientos');
 
 $router->post('requerimientos', 'RequerimientoController@store');

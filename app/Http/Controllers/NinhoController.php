@@ -112,6 +112,23 @@ class NinhoController extends Controller {
         return response()->json($cancer);
     }
 
+    public function updateCancer(Request $request, $id, $id_cancer) {
+        $ninho = Ninho::find($id);
+
+        if (!$ninho) {
+            return "Mi pana, el ninho con el id ${id} no existe";
+        }
+
+        foreach($ninho->cancer as $cancer) {
+            if($cancer->id == $id_cancer) {
+                $cancer->pivot->update($request->all());
+                return response()->json($cancer);
+            }
+        }
+
+        return "Mi pana, el ninho con el id ${id} no tiene ese tipo de cancer";
+    }
+
     public function indexRequerimientos($id) {
         $ninho = Ninho::find($id);
 

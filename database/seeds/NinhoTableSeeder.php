@@ -16,17 +16,17 @@ class NinhoTableSeeder extends Seeder
     {
         DB::table('ninho')->delete();
 
-        $ninhos = collect([]);
         $representantes = Representante::all();
 
         foreach(range(1, 20) as $index) {
-            $cancer = Cancer::orderByRaw("RAND()")->first();
+            $canceres = Cancer::all();
 
             $ninho = factory(Ninho::class)->create([
                 'representante_cedula' => $representantes->random()->cedula
             ]);
 
-            $cancer->ninhos()->attach($ninho);
+            $canceres->random()->ninhos()->attach($ninho);
+            $canceres->random()->ninhos()->attach($ninho);
         }
     }
 }
