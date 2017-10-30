@@ -12,7 +12,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return 'Manos vacias API';
+    return 'Manos vacias API. Corregir: agregar bitacora, manejar correctamente el estado y no se';
 });
 
 $router->post('users/login', 'UserController@login');
