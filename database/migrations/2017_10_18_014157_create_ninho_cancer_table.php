@@ -15,10 +15,11 @@ class CreateNinhoCancerTable extends Migration
     {
         Schema::create('ninho_cancer', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('descripcion');
             $table->timestamps();
 
-            $table->integer('ninho_id')->unsigned();
-            $table->integer('cancer_id')->unsigned();
+            $table->integer('ninho_id')->index()->unsigned();
+            $table->integer('cancer_id')->index()->unsigned();
 
             /*$table->foreign('ninho_id')->references('id')->on('ninho')->onDelete('cascade');
             $table->foreign('cancer_id')->references('id')->on('cancer')->onDelete('cascade');*/
