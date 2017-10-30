@@ -40,6 +40,8 @@ $router->get('niños/{id}', 'NiñoController@show');
 $router->put('niños/{id}', 'NiñoController@update');
 $router->delete('niños/{id}', 'NiñoController@destroy');
 
+$router->get('niños/{id}/cancer', 'NiñoController@indexCancer');
+
 $router->post('requerimientos', 'RequerimientoController@store');
 $router->get('requerimientos', 'RequerimientoController@index');
 $router->get('requerimientos/{id}', 'RequerimientoController@show');
