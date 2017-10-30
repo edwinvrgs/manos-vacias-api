@@ -16,9 +16,9 @@ class RepresentanteController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $representates = Representante::all();
+        $representantes = Representante::join('municipio', 'representante.municipio_id', '=', 'municipio.id')->select('*', 'municipio.descripcion as descripcion_municipio')->get();
 
-        return response()->json($representates);
+        return response()->json($representantes);
     }
 
     /**
