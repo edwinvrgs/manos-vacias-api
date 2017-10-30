@@ -31,7 +31,7 @@ class UserController extends Controller {
     public function index(Request $request) {
         $users = User::all();
 
-        return response()->json($users->toJson());
+        return response()->json($users);
     }
 
     /**
@@ -47,7 +47,7 @@ class UserController extends Controller {
             return "Mi pana, el user con el id ${id} no existe";
         }
 
-        return response()->json($user->toJson());
+        return response()->json($user);
     }
 
     /**

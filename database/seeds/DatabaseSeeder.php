@@ -15,10 +15,16 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call([
-            CancerTableSeeder::class,
-            //EstadoTableSeeder::class,
+            EstadoTableSeeder::class,
+            MunicipioTableSeeder::class,
             RolTableSeeder::class,
-            TipoTableSeeder::class
+            TipoTableSeeder::class,
+            CancerTableSeeder::class,
+            RepresentanteTableSeeder::class,
+            UserTableSeeder::class,
+            NinhoTableSeeder::class,
+            RequerimientoTableSeeder::class,
+            AdjuntoTableSeeder::class
         ]);
 
         Model::reguard();

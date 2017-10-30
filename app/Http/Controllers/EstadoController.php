@@ -16,7 +16,7 @@ class EstadoController extends Controller {
     public function index(Request $request) {
         $estados = Estado::all();
 
-        return response()->json($estados->toJson());
+        return response()->json($estados);
     }
 
     /**
@@ -32,7 +32,7 @@ class EstadoController extends Controller {
             return "Mi pana, el estado con el id ${id} no existe";
         }
 
-        return response()->json($estado->toJson());
+        return response()->json($estado);
     }
 
     /**

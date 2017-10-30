@@ -17,6 +17,9 @@ class Ninho extends Model implements AuthenticatableContract, AuthorizableContra
      *
      * @var array
      */
+
+    protected $table = 'ninho';
+
     protected $fillable = [
         'nombre', 'apellido', 'descripcion_situacion'
     ];
@@ -26,7 +29,7 @@ class Ninho extends Model implements AuthenticatableContract, AuthorizableContra
     }
 
     public function cancer() {
-        return $this->belongsToMany(Cancer::class)->withTimestamps();
+        return $this->belongsToMany(Cancer::class, 'ninho_cancer', 'cancer_id', 'ninho_id')->withPivot('descripcion')->withTimestamps();
     }
 
     public function representante() {

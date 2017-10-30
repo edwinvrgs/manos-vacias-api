@@ -16,7 +16,7 @@ class RolController extends Controller {
     public function index(Request $request) {
         $roles = Rol::all();
 
-        return response()->json($roles->toJson());
+        return response()->json($roles);
     }
 
     /**
@@ -32,7 +32,7 @@ class RolController extends Controller {
             return "Mi pana, el rol con el id ${id} no existe";
         }
 
-        return response()->json($rol->toJson());
+        return response()->json($rol);
     }
 
     /**

@@ -13,11 +13,7 @@ class EstadoTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('estado')->delete();
         $estados = factory(Estado::class)->times(10)->create();
-
-        foreach($estados as $estado) {
-
-            $estado->municipios()->saveMany(factory(Municipio::class)->times(10)->create());
-        }
     }
 }

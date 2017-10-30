@@ -12,6 +12,7 @@ class CancerTableSeeder extends Seeder
      */
     public function run()
     {
+		DB::table('cancer')->delete();
         factory(Cancer::class)->times(50)->create();
     }
 }

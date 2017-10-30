@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Rol;
+use App\Representante;
 
 class UserTableSeeder extends Seeder
 {
@@ -12,6 +14,16 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->times(6)->create();
+        DB::table('user')->delete();
+
+        $roles = Rol::all();
+        $representantes = Representante::all();
+
+        foreach(range(1, 8) as $index) {
+            factory(User::class)->create([
+                'rol_id' => $roles->random()->id,
+                'representante_cedula' => $representantes->pop()->cedula
+            ]);
+        }
     }
 }

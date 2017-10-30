@@ -35,16 +35,17 @@ $factory->define(App\Requerimiento::class, function (Faker\Generator $faker) {
     return [
         'descripcion' => $faker->sentence(10),
         'cantidad' => $faker->randomDigit,
-        'fecha_vencimiento' => $faker->optional($weight = 0.5, $default = null)->date,
-        'estado' => false
+        'fecha_vencimiento' => $faker->date,
+        'estado' => null
     ];
 });
 
 $factory->define(App\Representante::class, function (Faker\Generator $faker) {
     return [
+        'cedula' => $faker->unique()->randomDigitNotNull,
         'nombre' => $faker->firstName,
         'apellido' => $faker->lastName,
-        'numero_contacto_1' => $faker->unique()->e164PhoneNumber,
+        'numero_contacto_1' => $faker->e164PhoneNumber,
         'numero_contacto_2' => $faker->optional($weight = 0.5, $default = null)->e164PhoneNumber
     ];
 });
@@ -78,7 +79,6 @@ $factory->define(App\Cancer::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Adjunto::class, function (Faker\Generator $faker) {
     return [
-        'nombre' => $faker->jobTitle,
         'descripcion' => $faker->sentence,
         'imagen' => $faker->optional($weight = 0.5, $default = null)->imageUrl
     ];

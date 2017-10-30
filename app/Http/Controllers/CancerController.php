@@ -16,7 +16,7 @@ class CancerController extends Controller {
     public function index(Request $request) {
         $cancers = Cancer::all();
 
-        return response()->json($cancers->toJson());
+        return response()->json($cancers);
     }
 
     /**
@@ -32,7 +32,7 @@ class CancerController extends Controller {
             return "Mi pana, el cancer con el id ${id} no existe";
         }
 
-        return response()->json($cancer->toJson());
+        return response()->json($cancer);
     }
 
     /**

@@ -17,7 +17,7 @@ class AdjuntoController extends Controller {
     public function index(Request $request) {
         $adjuntos = Adjunto::all();
 
-        return response()->json($adjuntos->toJson());
+        return response()->json($adjuntos);
     }
 
     /**
@@ -33,7 +33,7 @@ class AdjuntoController extends Controller {
             return "Mi pana, el adjunto con el id ${id} no existe";
         }
 
-        return response()->json($adjunto->toJson());
+        return response()->json($adjunto);
     }
 
     /**

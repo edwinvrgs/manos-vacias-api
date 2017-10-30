@@ -18,7 +18,7 @@ class RequerimientoController extends Controller {
     public function index(Request $request) {
         $requerimientos = Requerimiento::all();
 
-        return response()->json($requerimientos->toJson());
+        return response()->json($requerimientos);
     }
 
     /**
@@ -34,7 +34,7 @@ class RequerimientoController extends Controller {
             return "Mi pana, el requerimiento con el id ${id} no existe";
         }
 
-        return response()->json($requerimiento->toJson());
+        return response()->json($requerimiento);
     }
 
     /**

@@ -19,7 +19,7 @@ class NinhoController extends Controller {
     public function index(Request $request) {
         $ninhos = Ninho::all();
 
-        return response()->json($ninhos->toJson());
+        return response()->json($ninhos);
     }
 
     /**
@@ -35,7 +35,7 @@ class NinhoController extends Controller {
             return "Mi pana, el ninho con el id ${id} no existe";
         }
 
-        return response()->json($ninhos->toJson());
+        return response()->json($ninhos);
     }
 
     /**
@@ -94,6 +94,18 @@ class NinhoController extends Controller {
 
         return response()->json('Ninho eliminado correctamente');
     }
+
+    public function indexCancer($id) {
+        $ninhos = Ninho::find($id);
+        $cancer = $ninho->cancer;
+
+        if (!$cancer) {
+            return "Mi pana, el ninho con el id ${id} no tiene cancer asociado";
+        }
+
+        return response()->json($cancer);
+    }
+
 
     /**
      * Store Request Validation Rules

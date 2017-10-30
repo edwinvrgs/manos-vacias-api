@@ -21,6 +21,8 @@ class Representante extends Model implements AuthenticatableContract, Authorizab
     protected $table = 'representante';
     protected $primaryKey = 'cedula';
 
+    public $incrementing = false;
+
     protected $fillable = [
         'nombre', 'apellido', 'numero_contacto_1', 'numero_contacto_2'
     ];

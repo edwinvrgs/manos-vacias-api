@@ -12,6 +12,7 @@ class RolTableSeeder extends Seeder
      */
     public function run()
     {
+		DB::table('rol')->delete();
         factory(Rol::class)->times(2)->create();
     }
 }

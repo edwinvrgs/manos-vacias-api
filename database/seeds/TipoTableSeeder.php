@@ -12,6 +12,7 @@ class TipoTableSeeder extends Seeder
      */
     public function run()
     {
+		DB::table('tipo')->delete();
         factory(Tipo::class)->times(3)->create();
     }
 }

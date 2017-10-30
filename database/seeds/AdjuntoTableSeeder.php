@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Adjunto;
+use App\Requerimiento;
 
 class AdjuntoTableSeeder extends Seeder
 {
@@ -12,6 +13,14 @@ class AdjuntoTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Adjunto::class)->times(6)->create();
+        DB::table('adjunto')->delete();
+
+        $requerimientos = Requerimiento::all();
+
+        foreach(range(1, 50) as $index) {
+            factory(Adjunto::class)->create([
+                'requerimiento_id' => $requerimientos->random()->id
+            ]);
+        }
     }
 }

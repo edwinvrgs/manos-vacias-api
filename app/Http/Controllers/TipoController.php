@@ -16,7 +16,7 @@ class TipoController extends Controller {
     public function index(Request $request) {
         $tipos = Tipo::all();
 
-        return response()->json($tipos->toJson());
+        return response()->json($tipos);
     }
 
     /**
@@ -32,7 +32,7 @@ class TipoController extends Controller {
             return "Mi pana, el tipo con el id ${id} no existe";
         }
 
-        return response()->json($tipo->toJson());
+        return response()->json($tipo);
     }
 
     /**

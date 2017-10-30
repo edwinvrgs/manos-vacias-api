@@ -17,7 +17,7 @@ class MunicipioController extends Controller {
     public function index(Request $request) {
         $municipios = Municipio::all();
 
-        return response()->json($municipios->toJson());
+        return response()->json($municipios);
     }
 
     /**
@@ -33,7 +33,7 @@ class MunicipioController extends Controller {
             return "Mi pana, el municipio con el id ${id} no existe";
         }
 
-        return response()->json($municipio->toJson());
+        return response()->json($municipio);
     }
 
     /**
