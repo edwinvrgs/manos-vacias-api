@@ -13,7 +13,7 @@ class UserController extends Controller {
         $password = $request->input('password');
 
         $user = User::where('username', $username)
-                ->where('password', $password)->get();
+                ->where('password', app('hash')->make($password))->get();
 
         if (!$user) {
             return "Mi pana, el user que intentas buscar no existe";
