@@ -11,14 +11,13 @@ class UserController extends Controller {
     public function login(Request $request) {
         $username = $request->input('username');
         $password = $request->input('password');
+
         $user = User::where('username', $username)
                 ->where('password', $password)->get();
 
         if (!$user) {
             return "Mi pana, el user que intentas buscar no existe";
         }
-
-        
 
     	return response()->json($user);
     }
