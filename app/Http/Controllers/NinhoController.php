@@ -29,13 +29,13 @@ class NinhoController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function show($id) {
-        $ninhos = Ninho::find($id);
+        $ninho = Ninho::find($id);
 
         if (!$ninho instanceof Ninho) {
             return "Mi pana, el ninho con el id ${id} no existe";
         }
 
-        return response()->json($ninhos);
+        return response()->json($ninho);
     }
 
     /**
@@ -96,7 +96,12 @@ class NinhoController extends Controller {
     }
 
     public function indexCancer($id) {
-        $ninhos = Ninho::find($id);
+        $ninho = Ninho::find($id);
+
+        if (!$ninho) {
+            return "Mi pana, el ninho con el id ${id} no existe";
+        }
+
         $cancer = $ninho->cancer;
 
         if (!$cancer) {

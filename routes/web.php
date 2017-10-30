@@ -34,13 +34,13 @@ $router->get('representantes/{id}', 'RepresentanteController@show');
 $router->put('representantes/{id}', 'RepresentanteController@update');
 $router->delete('representantes/{id}', 'RepresentanteController@destroy');
 
-$router->post('ninhos', 'NiñoController@store');
-$router->get('ninhos', 'NiñoController@index');
-$router->get('ninhos/{id}', 'NiñoController@show');
-$router->put('ninhos/{id}', 'NiñoController@update');
-$router->delete('ninhos/{id}', 'NiñoController@destroy');
+$router->post('ninhos', 'NinhoController@store');
+$router->get('ninhos', 'NinhoController@index');
+$router->get('ninhos/{id}', 'NinhoController@show');
+$router->put('ninhos/{id}', 'NinhoController@update');
+$router->delete('ninhos/{id}', 'NinhoController@destroy');
 
-$router->get('ninhos/{id}/cancer', 'NiñoController@indexCancer');
+$router->get('ninhos/{id}/cancer', 'NinhoController@indexCancer');
 
 $router->post('requerimientos', 'RequerimientoController@store');
 $router->get('requerimientos', 'RequerimientoController@index');
