@@ -14,7 +14,7 @@ class CancerController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $cancers = Cancer::all();
+        $cancers = Cancer::where('estado', 1)->get();
 
         return response()->json($cancers);
     }
@@ -30,6 +30,8 @@ class CancerController extends Controller {
 
         if (!$cancer instanceof Cancer) {
             return "Mi pana, el cancer con el id ${id} no existe";
+        } else if($cancer->estado == 0) {
+            return "Mi pana, el cancer con el id ${id} esta deshabilitado";
         }
 
         return response()->json($cancer);
@@ -79,9 +81,10 @@ class CancerController extends Controller {
             return "Mi pana, el cancer con el id ${id} no existe";
         }
 
-        $cancer->delete();
+        $cancer->estado = false;
+        $cancer->save();
 
-        return response()->json('Cancer eliminado correctamente');
+        return response()->json('Cancer deshabilitado correctamente');
     }
 
     /**

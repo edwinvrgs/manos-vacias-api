@@ -14,7 +14,7 @@ class RolController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $roles = Rol::all();
+        $roles = Rol::where('estado', 1)->get();
 
         return response()->json($roles);
     }
@@ -30,6 +30,8 @@ class RolController extends Controller {
 
         if (!$rol instanceof Rol) {
             return "Mi pana, el rol con el id ${id} no existe";
+        } else if($rol->estado == 0) {
+            return "Mi pana, el rol con el id ${id} esta deshabilitado";
         }
 
         return response()->json($rol);
@@ -79,9 +81,10 @@ class RolController extends Controller {
             return "Mi pana, el rol con el id ${id} no existe";
         }
 
-        $rol->delete();
+        $rol->estado = false;
+        $rol->save();
 
-        return response()->json('Rol eliminado correctamente');
+        return response()->json('Rol deshabilitado correctamente');
     }
 
     /**

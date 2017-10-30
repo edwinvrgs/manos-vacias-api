@@ -14,7 +14,7 @@ class EstadoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $estados = Estado::all();
+        $estados = Estado::where('estado', 1)->get();
 
         return response()->json($estados);
     }
@@ -30,6 +30,8 @@ class EstadoController extends Controller {
 
         if (!$estado instanceof Estado) {
             return "Mi pana, el estado con el id ${id} no existe";
+        } else if($estado->estado == 0) {
+            return "Mi pana, el estado con el id ${id} esta deshabilitado";
         }
 
         return response()->json($estado);
@@ -79,9 +81,10 @@ class EstadoController extends Controller {
             return "Mi pana, el estado con el id ${id} no existe";
         }
 
-        $estado->delete();
+        $estado->estado = false;
+        $estado->save();
 
-        return response()->json('Estado eliminado correctamente');
+        return response()->json('Estado deshabilitado correctamente');
     }
 
     /**
