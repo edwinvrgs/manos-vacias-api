@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Representante;
 use App\Ninho;
 use App\Cancer;
+use App\Requerimiento;
 
 class NinhoController extends Controller {
 
@@ -109,6 +110,22 @@ class NinhoController extends Controller {
         }
 
         return response()->json($cancer);
+    }
+
+    public function indexRequerimientos($id) {
+        $ninho = Ninho::find($id);
+
+        $requerimientos = Requerimiento::where('ninho_id', $id)->get();
+
+        if (!$ninho) {
+            return "Mi pana, el ninho con el id ${id} no existe";
+        }
+
+        if (!$requerimientos) {
+            return "Mi pana, el ninho con el id ${id} no tiene requerimientos asociado";
+        }
+
+        return response()->json($requerimientos);
     }
 
 
