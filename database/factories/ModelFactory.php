@@ -72,8 +72,7 @@ $factory->define(App\Estado::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Cancer::class, function (Faker\Generator $faker) {
     return [
-        'nombre' => $faker->unique()->jobTitle,
-        'descripcion' => $faker->catchPhrase
+        'nombre' => $faker->unique()->jobTitle
     ];
 });
 
