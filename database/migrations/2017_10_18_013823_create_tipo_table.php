@@ -16,7 +16,8 @@ class CreateTipoTable extends Migration
         Schema::create('tipo', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion', 45)->unique();
-            $table->boolean('estado')->default(true);
+            $table->boolean('is_medicamento')->default(false);
+            $table->boolean('enable')->default(true);
             $table->timestamps();
         });
     }

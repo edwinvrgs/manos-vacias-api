@@ -16,7 +16,7 @@ class RepresentanteController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $representantes = Representante::join('municipio', 'representante.municipio_id', '=', 'municipio.id')->select('*', 'municipio.descripcion as descripcion_municipio')->get();
+        $representantes = Representante::join('municipio', 'representante.municipio_id', '=', 'municipio.id')->select('*', 'municipio.descripcion as descripcion_municipio')->where('enable', 1)->get();
 
         return response()->json($representantes);
     }
@@ -91,9 +91,10 @@ class RepresentanteController extends Controller {
             return "Mi pana, el representante con el id ${id} no existe";
         }
 
-        $representante->delete();
+        $representante->enable = 0;
+        $representante->save();
 
-        return response()->json('Representante eliminado correctamente');
+        return response()->json('Representante deshabilitado correctamente');
     }
 
     public function indexNinhos(Request $request, $id) {

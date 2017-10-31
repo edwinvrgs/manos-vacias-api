@@ -14,7 +14,7 @@ class RolController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $roles = Rol::where('estado', 1)->get();
+        $roles = Rol::where('enable', 1)->get();
 
         return response()->json($roles);
     }
@@ -81,7 +81,7 @@ class RolController extends Controller {
             return "Mi pana, el rol con el id ${id} no existe";
         }
 
-        $rol->estado = false;
+        $rol->enable = false;
         $rol->save();
 
         return response()->json('Rol deshabilitado correctamente');

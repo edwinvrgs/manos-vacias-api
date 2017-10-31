@@ -18,7 +18,7 @@ class CreateRequerimientosTable extends Migration
             $table->string('descripcion', 45);
             $table->integer('cantidad');
             $table->date('fecha_vencimiento');
-            $table->date('estado')->nullable();
+            $table->boolean('enable')->default(true);
             $table->timestamps();
 
             $table->integer('tipo_id')->unsigned();

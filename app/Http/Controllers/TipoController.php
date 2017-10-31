@@ -14,7 +14,7 @@ class TipoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $tipos = Tipo::where('estado', 1)->get();
+        $tipos = Tipo::where('enable', 1)->get();
 
         return response()->json($tipos);
     }
@@ -81,7 +81,7 @@ class TipoController extends Controller {
             return "Mi pana, el tipo con el id ${id} no existe";
         }
 
-        $tipo->estado = false;
+        $tipo->enable = false;
         $tipo->save();
 
         return response()->json('Tipo deshabilitado correctamente');

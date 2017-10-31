@@ -14,7 +14,7 @@ class EstadoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $estados = Estado::where('estado', 1)->get();
+        $estados = Estado::where('enable', 1)->get();
 
         return response()->json($estados);
     }
@@ -81,7 +81,7 @@ class EstadoController extends Controller {
             return "Mi pana, el estado con el id ${id} no existe";
         }
 
-        $estado->estado = false;
+        $estado->enable = false;
         $estado->save();
 
         return response()->json('Estado deshabilitado correctamente');

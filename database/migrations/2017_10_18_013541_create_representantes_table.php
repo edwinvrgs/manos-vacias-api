@@ -19,6 +19,7 @@ class CreateRepresentantesTable extends Migration
             $table->string('apellido', 20);
             $table->string('numero_contacto_1', 15)->unique();
             $table->string('numero_contacto_2', 15)->nullable();
+            $table->boolean('enable')->default(true);
             $table->timestamps();
 
             $table->integer('municipio_id')->unsigned();

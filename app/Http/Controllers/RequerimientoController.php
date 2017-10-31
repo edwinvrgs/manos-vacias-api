@@ -16,7 +16,7 @@ class RequerimientoController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request) {
-        $requerimientos = Requerimiento::all();
+        $requerimientos = Requerimiento::where('enable', 1)->get();
 
         return response()->json($requerimientos);
     }
@@ -88,9 +88,10 @@ class RequerimientoController extends Controller {
             return "Mi pana, el requerimiento con el id ${id} no existe";
         }
 
-        $requerimiento->delete();
+        $requerimiento->enable = 0;
+        $requerimiento->save();
 
-        return response()->json('Requerimiento eliminado correctamente');
+        return response()->json('Requerimiento deshabilitado correctamente');
     }
 
     /**
