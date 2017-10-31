@@ -12,7 +12,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return 'Manos vacias API. Corregir: agregar bitacora, manejar correctamente el estado y diferenciar entre insumo y medicamento';
+    return 'Manos vacias API. Corregir';
 });
 
 $router->post('users/login', 'UserController@login');
@@ -20,19 +20,19 @@ $router->post('users', 'UserController@store');
 $router->get('users', 'UserController@index');
 $router->get('users/{id}', 'UserController@show');
 $router->post('users/{id}', 'UserController@update');
-$router->delete('users/{id}', 'UserController@destroy');
+$router->post('users/eliminar/{id}', 'UserController@destroy');
 
 $router->post('roles', 'RolController@store');
 $router->get('roles', 'RolController@index');
 $router->get('roles/{id}', 'RolController@show');
 $router->post('roles/{id}', 'RolController@update');
-$router->delete('roles/{id}', 'RolController@destroy');
+$router->post('roles/eliminar/{id}', 'RolController@destroy');
 
 $router->post('representantes', 'RepresentanteController@store');
 $router->get('representantes', 'RepresentanteController@index');
 $router->get('representantes/{id}', 'RepresentanteController@show');
 $router->post('representantes/{id}', 'RepresentanteController@update');
-$router->delete('representantes/{id}', 'RepresentanteController@destroy');
+$router->post('representantes/eliminar/{id}', 'RepresentanteController@destroy');
 
 $router->get('representantes/{id}/ninhos', 'RepresentanteController@indexNinhos');
 
@@ -40,12 +40,12 @@ $router->post('ninhos', 'NinhoController@store');
 $router->get('ninhos', 'NinhoController@index');
 $router->get('ninhos/{id}', 'NinhoController@show');
 $router->post('ninhos/{id}', 'NinhoController@update');
-$router->delete('ninhos/{id}', 'NinhoController@destroy');
+$router->post('ninhos/eliminar/{id}', 'NinhoController@destroy');
 
 $router->get('ninhos/{id}/cancer', 'NinhoController@indexCancer');
 $router->post('ninhos/{id}/cancer', 'NinhoController@storeCancer');
 $router->post('ninhos/{id}/cancer/{id_cancer}', 'NinhoController@updateCancer');
-$router->delete('ninhos/{id}/cancer/{id_cancer}', 'NinhoController@destroyCancer');
+$router->post('ninhos/{id}/cancer/eliminar/{id_cancer}', 'NinhoController@destroyCancer');
 
 $router->get('ninhos/{id}/requerimientos', 'NinhoController@indexRequerimientos');
 
@@ -53,34 +53,34 @@ $router->post('requerimientos', 'RequerimientoController@store');
 $router->get('requerimientos', 'RequerimientoController@index');
 $router->get('requerimientos/{id}', 'RequerimientoController@show');
 $router->post('requerimientos/{id}', 'RequerimientoController@update');
-$router->delete('requerimientos/{id}', 'RequerimientoController@destroy');
+$router->post('requerimientos/eliminar/{id}', 'RequerimientoController@destroy');
 
 $router->post('cancer', 'CancerController@store');
 $router->get('cancer', 'CancerController@index');
 $router->get('cancer/{id}', 'CancerController@show');
 $router->post('cancer/{id}', 'CancerController@update');
-$router->delete('cancer/{id}', 'CancerController@destroy');
+$router->post('cancer/eliminar/{id}', 'CancerController@destroy');
 
 $router->post('adjuntos', 'AdjuntoController@store');
 $router->get('adjuntos', 'AdjuntoController@index');
 $router->get('adjuntos/{id}', 'AdjuntoController@show');
 $router->post('adjuntos/{id}', 'AdjuntoController@update');
-$router->delete('adjuntos/{id}', 'AdjuntoController@destroy');
+$router->post('adjuntos/eliminar/{id}', 'AdjuntoController@destroy');
 
 $router->post('estados', 'EstadoController@store');
 $router->get('estados', 'EstadoController@index');
 $router->get('estados/{id}', 'EstadoController@show');
 $router->post('estados/{id}', 'EstadoController@update');
-$router->delete('estados/{id}', 'EstadoController@destroy');
+$router->post('estados/eliminar/{id}', 'EstadoController@destroy');
 
 $router->post('municipios', 'MunicipioController@store');
 $router->get('municipios', 'MunicipioController@index');
 $router->get('municipios/{id}', 'MunicipioController@show');
 $router->post('municipios/{id}', 'MunicipioController@update');
-$router->delete('municipios/{id}', 'MunicipioController@destroy');
+$router->post('municipios/eliminar/{id}', 'MunicipioController@destroy');
 
 $router->post('tipos', 'TipoController@store');
 $router->get('tipos', 'TipoController@index');
 $router->get('tipos/{id}', 'TipoController@show');
 $router->post('tipos/{id}', 'TipoController@update');
-$router->delete('tipos/{id}', 'TipoController@destroy');
+$router->post('tipos/eliminar/{id}', 'TipoController@destroy');
