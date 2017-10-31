@@ -42,6 +42,6 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     }
 
     public function bitacora() {
-        return $this->hasOne(Bitacora::class);
+        return $this->hasMany(Bitacora::class);
     }
 }

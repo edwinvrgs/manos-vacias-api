@@ -21,7 +21,7 @@ class Bitacora extends Model implements AuthenticatableContract, AuthorizableCon
     protected $table = 'bitacora';
 
     protected $fillable = [
-        'operacion', 'fecha',
+        'ip', 'operacion', 'fecha',
     ];
 
     public function user() {
