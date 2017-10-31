@@ -29,7 +29,7 @@ class Ninho extends Model implements AuthenticatableContract, AuthorizableContra
     }
 
     public function cancer() {
-        return $this->belongsToMany(Cancer::class, 'ninho_cancer')->withPivot('descripcion')->withTimestamps();
+        return $this->belongsToMany(Cancer::class, 'ninho_cancer')->withPivot('descripcion')->withPivot('enable')->withTimestamps();
     }
 
     public function representante() {

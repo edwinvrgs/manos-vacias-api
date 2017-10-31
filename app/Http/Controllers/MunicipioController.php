@@ -26,7 +26,7 @@ class MunicipioController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $municipio = Municipio::find($id);
 
         if (!$municipio instanceof Municipio) {
@@ -50,6 +50,12 @@ class MunicipioController extends Controller {
         $municipio->estado()->associate($estado);
         $municipio->save();
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'municipio';
+        $bitacora->save();
+
         return response()->json($municipio);
     }
 
@@ -69,6 +75,12 @@ class MunicipioController extends Controller {
 
         $municipio->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'municipio';
+        $bitacora->save();
+
         return response()->json($municipio);
     }
 
@@ -78,7 +90,7 @@ class MunicipioController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $municipio = Municipio::find($id);
 
         if (!$municipio instanceof Municipio) {
@@ -86,6 +98,12 @@ class MunicipioController extends Controller {
         }
 
         $municipio->delete();
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'municipio';
+        $bitacora->save();
 
         return response()->json('Municipio eliminado correctamente');
     }

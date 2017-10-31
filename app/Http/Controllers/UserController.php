@@ -20,6 +20,12 @@ class UserController extends Controller {
             return "Mi pana, el user que intentas buscar no existe";
         }
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'iniciar sesion';
+        $bitacora->tabla = 'user';
+        $bitacora->save();
+
     	return response()->json($user);
     }
 
@@ -41,7 +47,7 @@ class UserController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $user = User::find($id);
 
         if (!$user instanceof User) {
@@ -67,6 +73,12 @@ class UserController extends Controller {
         $user->representante()->associate($representante);
         $user->save();
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'user';
+        $bitacora->save();
+
     	return response()->json($user);
     }
 
@@ -86,6 +98,12 @@ class UserController extends Controller {
 
         $user->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'user';
+        $bitacora->save();
+
     	return response()->json($user);
     }
 
@@ -95,7 +113,7 @@ class UserController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $user = User::find($id);
 
         if (!$user instanceof User) {
@@ -103,6 +121,12 @@ class UserController extends Controller {
         }
 
         $user->delete();
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'user';
+        $bitacora->save();
 
         return response()->json('User eliminado correctamente');
     }

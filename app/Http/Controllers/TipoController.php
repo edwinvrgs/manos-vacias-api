@@ -25,7 +25,7 @@ class TipoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $tipo = Tipo::find($id);
 
         if (!$tipo instanceof Tipo) {
@@ -46,6 +46,12 @@ class TipoController extends Controller {
     public function store(Request $request) {
     	$tipo = Tipo::create($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'tipo';
+        $bitacora->save();
+
     	return response()->json($tipo);
     }
 
@@ -65,6 +71,12 @@ class TipoController extends Controller {
 
         $tipo->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'tipo';
+        $bitacora->save();
+
     	return response()->json($tipo);
     }
 
@@ -74,7 +86,7 @@ class TipoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $tipo = Tipo::find($id);
 
         if (!$tipo instanceof Tipo) {
@@ -83,6 +95,12 @@ class TipoController extends Controller {
 
         $tipo->enable = false;
         $tipo->save();
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'tipo';
+        $bitacora->save();
 
         return response()->json('Tipo deshabilitado correctamente');
     }

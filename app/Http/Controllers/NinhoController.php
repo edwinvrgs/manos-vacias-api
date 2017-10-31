@@ -29,7 +29,7 @@ class NinhoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $ninho = Ninho::find($id);
 
         if (!$ninho instanceof Ninho) {
@@ -56,6 +56,12 @@ class NinhoController extends Controller {
 
         $ninho->save();
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'ninho';
+        $bitacora->save();
+
         return response()->json($ninho);
     }
 
@@ -75,6 +81,12 @@ class NinhoController extends Controller {
 
         $ninho->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'ninho';
+        $bitacora->save();
+
         return response()->json($ninho);
     }
 
@@ -84,7 +96,7 @@ class NinhoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $ninho = Ninho::find($id);
 
         if (!$ninho instanceof Ninho) {
@@ -93,10 +105,16 @@ class NinhoController extends Controller {
 
         $ninho->delete();
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'ninho';
+        $bitacora->save();
+
         return response()->json('Ninho eliminado correctamente');
     }
 
-    public function indexCancer($id) {
+    public function indexCancer(Request $request, $id) {
         $ninho = Ninho::find($id);
 
         if (!$ninho) {
@@ -112,6 +130,35 @@ class NinhoController extends Controller {
         return response()->json($cancer);
     }
 
+    public function storeCancer(Request $request, $id) {
+        $ninho = Ninho::find($id);
+
+        $cancer_id = $request->input('cancer_id');
+        $cancer = Cancer::find($cancer_id);
+
+        if (!$ninho) {
+            return "Mi pana, el ninho con el id ${id} no existe";
+        }
+
+        if (!$cancer) {
+            return "Mi pana, el cancer con el id ${cancer_id} no existe";
+        }
+
+        if (!$ninho->cancer->contains($cancer->id)) {
+            $ninho->cancer()->save($cancer);
+
+            $bitacora = new Bitacora();
+            $bitacora->ip = $request->getClientIp();
+            $bitacora->operacion = 'crear';
+            $bitacora->tabla = 'ninho_cancer';
+            $bitacora->save();
+        } else {
+            return "Mi pana, el cancer con el id ${cancer_id} ya esta asignado a este ninho";
+        }
+
+        return response()->json($ninho);
+    }
+
     public function updateCancer(Request $request, $id, $id_cancer) {
         $ninho = Ninho::find($id);
 
@@ -122,12 +169,45 @@ class NinhoController extends Controller {
         foreach($ninho->cancer as $cancer) {
             if($cancer->id == $id_cancer) {
                 $cancer->pivot->update($request->all());
+
+                $bitacora = new Bitacora();
+                $bitacora->ip = $request->getClientIp();
+                $bitacora->operacion = 'actualizar';
+                $bitacora->tabla = 'ninho_cancer';
+                $bitacora->save();
+
                 return response()->json($cancer);
             }
         }
 
         return "Mi pana, el ninho con el id ${id} no tiene ese tipo de cancer";
     }
+
+    public function destroyCancer(Request $request, $id, $id_cancer) {
+        $ninho = Ninho::find($id);
+
+        if (!$ninho) {
+            return "Mi pana, el ninho con el id ${id} no existe";
+        }
+
+        foreach($ninho->cancer as $cancer) {
+            if($cancer->id == $id_cancer) {
+                $cancer->pivot->enable = false;
+                $cancer->pivot->save();
+
+                $bitacora = new Bitacora();
+                $bitacora->ip = $request->getClientIp();
+                $bitacora->operacion = 'eliminar';
+                $bitacora->tabla = 'ninho_cancer';
+                $bitacora->save();
+
+                return response()->json($cancer);
+            }
+        }
+
+        return "Mi pana, el ninho con el id ${id} no tiene ese tipo de cancer";
+    }
+
 
     public function indexRequerimientos($id) {
         $ninho = Ninho::find($id);

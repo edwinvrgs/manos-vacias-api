@@ -25,7 +25,7 @@ class RolController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $rol = Rol::find($id);
 
         if (!$rol instanceof Rol) {
@@ -44,7 +44,13 @@ class RolController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
-    	$rol = Rol::create($request->all());
+        $rol = Rol::create($request->all());
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'rol';
+        $bitacora->save();
 
     	return response()->json($rol);
     }
@@ -65,6 +71,12 @@ class RolController extends Controller {
 
         $rol->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'rol';
+        $bitacora->save();
+
         return response()->json($rol);
     }
 
@@ -74,7 +86,7 @@ class RolController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $rol = Rol::find($id);
 
         if (!$rol instanceof Rol) {
@@ -83,6 +95,12 @@ class RolController extends Controller {
 
         $rol->enable = false;
         $rol->save();
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'rol';
+        $bitacora->save();
 
         return response()->json('Rol deshabilitado correctamente');
     }

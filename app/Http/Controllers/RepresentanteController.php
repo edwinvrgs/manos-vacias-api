@@ -27,7 +27,7 @@ class RepresentanteController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $representante = Representante::find($id);
 
         if (!$representante instanceof Representante) {
@@ -56,6 +56,12 @@ class RepresentanteController extends Controller {
 
         $representante->save();
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'representante';
+        $bitacora->save();
+
         return response()->json($representante);
     }
 
@@ -75,6 +81,12 @@ class RepresentanteController extends Controller {
 
         $representante->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'representante';
+        $bitacora->save();
+
         return response()->json($representante);
     }
 
@@ -84,7 +96,7 @@ class RepresentanteController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $representante = Representante::find($id);
 
         if (!$representante instanceof Representante) {
@@ -93,6 +105,12 @@ class RepresentanteController extends Controller {
 
         $representante->enable = 0;
         $representante->save();
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'representante';
+        $bitacora->save();
 
         return response()->json('Representante deshabilitado correctamente');
     }

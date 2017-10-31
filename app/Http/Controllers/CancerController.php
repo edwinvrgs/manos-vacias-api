@@ -25,7 +25,7 @@ class CancerController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $cancer = Cancer::find($id);
 
         if (!$cancer instanceof Cancer) {
@@ -46,6 +46,12 @@ class CancerController extends Controller {
     public function store(Request $request) {
     	$cancer = Cancer::create($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'cancer';
+        $bitacora->save();
+
     	return response()->json($cancer);
     }
 
@@ -65,6 +71,12 @@ class CancerController extends Controller {
 
         $cancer->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'cancer';
+        $bitacora->save();
+
         return response()->json($cancer);
     }
 
@@ -74,7 +86,7 @@ class CancerController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $cancer = Cancer::find($id);
 
         if (!$cancer instanceof Cancer) {
@@ -83,6 +95,12 @@ class CancerController extends Controller {
 
         $cancer->enable = false;
         $cancer->save();
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'cancer';
+        $bitacora->save();
 
         return response()->json('Cancer deshabilitado correctamente');
     }

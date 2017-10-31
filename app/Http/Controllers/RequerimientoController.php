@@ -27,7 +27,7 @@ class RequerimientoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $requerimiento = Requerimiento::find($id);
 
         if (!$requerimiento instanceof Requerimiento) {
@@ -53,6 +53,12 @@ class RequerimientoController extends Controller {
 
         $requerimiento->save();
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'requerimiento';
+        $bitacora->save();
+
         return response()->json($requerimiento);
     }
 
@@ -72,6 +78,12 @@ class RequerimientoController extends Controller {
 
         $requerimiento->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'requerimiento';
+        $bitacora->save();
+
         return response()->json($requerimiento);
     }
 
@@ -81,7 +93,7 @@ class RequerimientoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $requerimiento = Requerimiento::find($id);
 
         if (!$requerimiento instanceof Requerimiento) {
@@ -90,6 +102,12 @@ class RequerimientoController extends Controller {
 
         $requerimiento->enable = 0;
         $requerimiento->save();
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'requerimiento';
+        $bitacora->save();
 
         return response()->json('Requerimiento deshabilitado correctamente');
     }

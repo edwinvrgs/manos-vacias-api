@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Adjunto;
 use App\Requerimiento;
+use App\Bitacora;
 
 class AdjuntoController extends Controller {
 
@@ -26,7 +27,7 @@ class AdjuntoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $adjunto = Adjunto::find($id);
 
         if (!$adjunto instanceof Adjunto) {
@@ -50,6 +51,12 @@ class AdjuntoController extends Controller {
         $adjunto->requerimiento()->associate($requerimiento);
         $adjunto->save();
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'adjunto';
+        $bitacora->save();
+
         return response()->json($adjunto);
     }
 
@@ -69,6 +76,12 @@ class AdjuntoController extends Controller {
 
         $adjunto->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'adjunto';
+        $bitacora->save();
+
         return response()->json($adjunto);
     }
 
@@ -78,12 +91,18 @@ class AdjuntoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $adjunto = Adjunto::find($id);
 
         if (!$adjunto instanceof Adjunto) {
             return "Mi pana, el adjunto con el id ${id} no existe";
         }
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'adjunto';
+        $bitacora->save();
 
         $adjunto->delete();
 

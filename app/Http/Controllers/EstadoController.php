@@ -25,7 +25,7 @@ class EstadoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function show($id) {
+    public function show(Request $request, $id) {
         $estado = Estado::find($id);
 
         if (!$estado instanceof Estado) {
@@ -44,7 +44,13 @@ class EstadoController extends Controller {
      * @return \Illuminate\Http\JsonResponse|string
      */
     public function store(Request $request) {
-    	$estado = Estado::create($request->all());
+        $estado = Estado::create($request->all());
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'crear';
+        $bitacora->tabla = 'estado';
+        $bitacora->save();
 
     	return response()->json($estado);
     }
@@ -65,6 +71,12 @@ class EstadoController extends Controller {
 
         $estado->update($request->all());
 
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'actualizar';
+        $bitacora->tabla = 'estado';
+        $bitacora->save();
+
         return response()->json($estado);
     }
 
@@ -74,7 +86,7 @@ class EstadoController extends Controller {
      * @param $id
      * @return \Illuminate\Http\JsonResponse|string
      */
-    public function destroy($id) {
+    public function destroy(Request $request, $id) {
         $estado = Estado::find($id);
 
         if (!$estado instanceof Estado) {
@@ -83,6 +95,12 @@ class EstadoController extends Controller {
 
         $estado->enable = false;
         $estado->save();
+
+        $bitacora = new Bitacora();
+        $bitacora->ip = $request->getClientIp();
+        $bitacora->operacion = 'eliminar';
+        $bitacora->tabla = 'estado';
+        $bitacora->save();
 
         return response()->json('Estado deshabilitado correctamente');
     }

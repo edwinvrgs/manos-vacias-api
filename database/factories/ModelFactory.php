@@ -35,8 +35,7 @@ $factory->define(App\Requerimiento::class, function (Faker\Generator $faker) {
     return [
         'descripcion' => $faker->sentence(10),
         'cantidad' => $faker->randomDigit,
-        'fecha_vencimiento' => $faker->date,
-        'estado' => null
+        'fecha_vencimiento' => $faker->date
     ];
 });
 

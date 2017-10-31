@@ -40,8 +40,4 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function representante() {
         return $this->belongsTo(Representante::class);
     }
-
-    public function bitacora() {
-        return $this->hasMany(Bitacora::class);
-    }
 }

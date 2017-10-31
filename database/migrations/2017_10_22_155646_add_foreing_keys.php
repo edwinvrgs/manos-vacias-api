@@ -43,10 +43,6 @@ class AddForeingKeys extends Migration
             $table->foreign('ninho_id')->references('id')->on('ninho')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('cancer_id')->references('id')->on('cancer')->onDelete('cascade')->onUpdate('cascade');
         });
-
-        Schema::table('bitacora', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade')->onUpdate('cascade');
-        });
     }
 
     /**
@@ -79,9 +75,6 @@ class AddForeingKeys extends Migration
         Schema::table('ninho_cancer', function (Blueprint $table) {
             $table->dropForeign(['ninho_id']);
             $table->dropForeign(['cancer_id']);
-        });
-        Schema::table('bitacora', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
         });
     }
 }

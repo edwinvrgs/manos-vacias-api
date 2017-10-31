@@ -16,6 +16,7 @@ class CreateNinhoCancerTable extends Migration
         Schema::create('ninho_cancer', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descripcion');
+            $table->boolean('enable')->default(true);
             $table->timestamps();
 
             $table->integer('ninho_id')->index()->unsigned();
