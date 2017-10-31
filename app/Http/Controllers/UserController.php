@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Rol;
+use App\Representante;
 
 class UserController extends Controller {
 
@@ -58,10 +59,12 @@ class UserController extends Controller {
      */
     public function store(Request $request) {
         $rol = Rol::find($request->input('rol_id'));
+        $representante = Representante::find($request->input('representante_cedula'));
 
         $user = new User($request->all());
         $user->password = $request->input('password');
         $user->rol()->associate($rol);
+        $user->representante()->associate($representante);
         $user->save();
 
     	return response()->json($user);
