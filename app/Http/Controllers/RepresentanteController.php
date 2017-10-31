@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Representante;
 use App\Municipio;
 use App\User;
+use App\Bitacora;
 
 class RepresentanteController extends Controller {
 

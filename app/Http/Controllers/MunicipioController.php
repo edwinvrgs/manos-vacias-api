@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Municipio;
 use App\Estado;
+use App\Bitacora;
 
 class MunicipioController extends Controller {
 

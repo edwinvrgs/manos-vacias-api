@@ -7,6 +7,7 @@ use App\Representante;
 use App\Ninho;
 use App\Cancer;
 use App\Requerimiento;
+use App\Bitacora;
 
 class NinhoController extends Controller {
 

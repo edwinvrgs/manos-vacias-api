@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Requerimiento;
 use App\Ninho;
 use App\Tipo;
+use App\Bitacora;
 
 class RequerimientoController extends Controller {
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Rol;
 use App\Representante;
+use App\Bitacora;
 
 class UserController extends Controller {
 

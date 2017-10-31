@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rol;
+use App\Bitacora;
 
 class RolController extends Controller {
 

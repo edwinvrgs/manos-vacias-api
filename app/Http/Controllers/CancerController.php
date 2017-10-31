@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cancer;
+use App\Bitacora;
 
 class CancerController extends Controller {
 
