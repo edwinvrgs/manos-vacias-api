@@ -12,7 +12,7 @@
 */
 
 $router->get('/', function () use ($router) {
-    return 'Manos vacias API. Corregir';
+    return 'Manos vacias API. Corregir muchas cosas en la BD. Migrar proyecto a Laravel';
 });
 
 $router->post('users/login', 'UserController@login');
